@@ -16,21 +16,31 @@ export default function Init(){
         <Container>
             <Header>
                 <nav>
-                    <a href="#page-1">1</a>
-                    <a href="#page-2">2</a>
-                    <a href="#page-3">3</a>
-                </nav>
+                    <a href="#page-1">Sobre Nós</a>
+                    <a href="#page-2">Pão</a>                    
+                </nav> 
+                <button onClick = {SignIn}>Login</button>
+                <button onClick = {SignUp}>Cadastro</button>
             </Header>
-            <scroll-container>
+            {/* <scroll-container>
                 <scroll-page id="page-1">1</scroll-page>
-                <scroll-page id="page-2">2</scroll-page>
-                <scroll-page id="page-3">3</scroll-page>
-            </scroll-container>
+                <scroll-page id="page-2">2</scroll-page>                
+            </scroll-container> */}
         </Container>
     )
 }
 
 const Container = styled.div `
+    width: 100%;
+    height: 100vh;
+    background-color: #FFF5E0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+
     scroll-container {
     display: block;
     width: 350px;
@@ -50,19 +60,48 @@ const Container = styled.div `
     }`
 
 const Header = styled.div `
-    a {
-    display: inline-block;
-    width: 50px;
-    text-decoration: none;
+    width: 100%;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #D37644;
+    position: fixed;
+    top: 0;
+
+    button{
+        border: none;              
+
+        font-style: normal;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 26px;
+        text-align: center;
+        color: #FFFFFF;
+        margin-right: 40px;
+
+        display: flex;        
+        justify-content: center;
+        align-items: center;
+        padding: 18px 122px;
+        gap: 10px;        
+        width: 180px;
+        height: 72px;
+        background: #389BAA;
+        border-radius: 8px;
     }
-    nav {
-    width: 339px;
-    padding: 5px;
-    border: 1px solid black;
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    }
+    a {    
+        text-decoration: none;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 26px;
+        text-align: center;
+        color: #FFFFFF;
+        margin-right: 40px;
+        font-family: 'Roboto', sans-serif;
+        cursor: pointer;
+    }   
   `
 
 
