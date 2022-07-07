@@ -19,7 +19,7 @@ export default function App(){
                     <div className="root">
                         <Container>
                             <Routes>
-                                <Route path="/" element={<Init />}/>
+                                {/*<Route path="/" element={<Init />}/>*/}
                                 <Route path="/sign-in" element={<SignIn />}/>
                                 <Route path="/sign-up" element={<SignUp />}/>
                                 <Route path="/menu" element={<Menu />}/>
