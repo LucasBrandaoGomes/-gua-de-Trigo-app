@@ -27,12 +27,12 @@ export default function Login(){
                 password:password
             }
             
-        const promise = axios.post("https://back-api-mywallet.herokuapp.com/login", sendLogin)
+        const promise = axios.post("http://localhost:5000/sign-in", sendLogin)
         
         promise            
         .then(res => {
             setInfoLogin({...res.data});
-            navigate("/wallet");
+            navigate("/menu");
 
         })
         .catch(err=> {
@@ -42,14 +42,14 @@ export default function Login(){
 
     return(
         <>  
-            <h1>MyWallet</h1>
+            <h1>ÁGUA DE TRIGO</h1>
             <Form onSubmit={SubmitLogin}>
                 <input type="email" disabled={disableButton} placeholder="email"  value={email} onChange={e => setEmail(e.target.value)} required/>
                 <input type="password" disabled={disableButton} placeholder="password" value={password} onChange={e => setPassword(e.target.value)} required/>
                 <Entrar type="submit" disabled={disableButton}>{disableButton ? <ThreeDots color="white"/> : "Entrar"}</Entrar>
             </Form >
             <Cadastrese>
-                <Link to="/signup">
+                <Link to="/sign-up">
                     <p>Não tem uma conta?Cadastre-se</p>
                 </Link>
             </Cadastrese>
@@ -58,51 +58,49 @@ export default function Login(){
 }
 
 const Form = styled.form`
-    display:flex;
-    flex-direction: column;
-    width: 303px;
-    background-color: #8C11BE;
-    input{
-        background: ${props => props.disabled ? "grey" : "#ffffff"};
-        color: ${props => props.disabled ? "#AFAFAF" : "grey"};
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;
-        margin-bottom:8px;
-        border: 1px solid #D5D5D5;
-        border-radius: 5px;
-        ::placeholder{
-            font-size: 18px;
-            color: #DBDBDB;
-        }
+display:flex;
+flex-direction: column;
+width: 303px;
+background-color: rgb(252, 181, 95);;
+input{
+    background: ${props => props.disabled ? "grey" : "#ffffff" };
+    color: ${props => props.disabled ? "#AFAFAF" : "grey" };
+    font-family: 'Lexend Deca';
+    font-style: normal; 
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
+    margin-bottom:8px;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    ::placeholder{
+        font-size: 18px;
+        color: #C0C0C0;}
     }
 `
 const Entrar = styled.button`
     width: 303px;
     height: 45px;
-    background: #A328D6;
+    background: rgba(59, 155, 170);
     border: none;
     border-radius: 4.63636px;
     text-decoration: none; 
     display:flex;
     align-items:center;
     justify-content:center;
-    
-    font-family: 'Raleway';
+
+    font-family: 'Shippori Antique';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
 
     color: #FFFFFF;
-
     opacity: ${props => props.disabled ? 0.4 : 1 };
     &:hover{
         cursor:pointer;
     }
-`
+    `
 const Cadastrese = styled.div`
     margin-top:35px;
     p{

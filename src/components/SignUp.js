@@ -68,7 +68,7 @@ export default function Signup(){
                 <Cadastrar type="submit" disabled={disableButton}>{disableButton ? <ThreeDots color="white"/> : "Cadastrar"}</Cadastrar>
             </Form >
             <Loguese>
-                <Link to="/login">
+                <Link to="/sign-in">
                     <p>Já tem uma conta?Faça login</p>
                 </Link>
             </Loguese>
@@ -82,10 +82,10 @@ const Form = styled.form`
     width: 303px;
     background-color: rgb(252, 181, 95);;
     input{
-        background: ${props => props.disabled ? "grey" : "#ffffff"};
-        color: ${props => props.disabled ? "#AFAFAF" : "grey"};
+        background: ${props => props.disabled ? "grey" : "#ffffff" };
+        color: ${props => props.disabled ? "#AFAFAF" : "grey" };
         font-family: 'Lexend Deca';
-        font-style: normal;
+        font-style: normal; 
         font-weight: 400;
         font-size: 19.976px;
         line-height: 25px;
