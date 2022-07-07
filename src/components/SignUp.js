@@ -1,10 +1,9 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import axios from "axios"
+import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import  { useState } from  "react"
 import { ThreeDots } from "react-loader-spinner";
-
 
 export default function Signup(){
     
@@ -13,6 +12,12 @@ export default function Signup(){
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [street, setStreet] = useState("")
+    const [number, setNumber] = useState("")
+    const [neighborhood, setNeighborhood] = useState("")
+    const [city, setCity] = useState("")
+    const [state, setState] = useState("")
+
     const [disableButton,setDisableButton] = useState(false)
 
 
@@ -26,15 +31,20 @@ export default function Signup(){
                 email,
                 name,
                 password,
-                passwordConfirmation
+                passwordConfirmation,
+                street,
+                number,
+                neighborhood,
+                city,
+                state
             }
         
 
-        const promise = axios.post("https://back-api-mywallet.herokuapp.com/signup", infoSignUp)
+        const promise = axios.post("http://localhost:5000/sign-up", infoSignUp)
         
         promise
         .then(res =>{ 
-            navigate("/login");
+            navigate("/sign-in");
         })
         .catch(err=> {alert("Erro, preencha corretamente os dados");
         setDisableButton(false);});
@@ -43,11 +53,16 @@ export default function Signup(){
 
     return(
         <>
-            <h1>MyWallet</h1>
+            <h1>ÁGUA DE TRIGO</h1>
             <Form onSubmit={SubmitSignUp} >
                 
                 <input type="text" disabled={disableButton} placeholder="nome" value={name} onChange={e => setName(e.target.value)} required/>
                 <input type="email" disabled={disableButton} placeholder="email"  value={email} onChange={e => setEmail(e.target.value)} required/>
+                <input type="text" disabled={disableButton} placeholder="rua" value={street} onChange={e => setStreet(e.target.value)} required/>
+                <input type="text" disabled={disableButton} placeholder="número" value={number} onChange={e => setNumber(e.target.value)} required/>
+                <input type="text" disabled={disableButton} placeholder="bairro" value={neighborhood} onChange={e => setNeighborhood(e.target.value)} required/>
+                <input type="text" disabled={disableButton} placeholder="cidade" value={city} onChange={e => setCity(e.target.value)} required/>
+                <input type="text" disabled={disableButton} placeholder="estado" value={state} onChange={e => setState(e.target.value)} required/>
                 <input type="password" disabled={disableButton} placeholder="senha" value={password} onChange={e => setPassword(e.target.value)} required/>
                 <input type="password" disabled={disableButton} placeholder="confirmação de senha" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} required/>
                 <Cadastrar type="submit" disabled={disableButton}>{disableButton ? <ThreeDots color="white"/> : "Cadastrar"}</Cadastrar>
@@ -65,7 +80,7 @@ const Form = styled.form`
     display:flex;
     flex-direction: column;
     width: 303px;
-    background-color: #8C11BE;
+    background-color: rgb(252, 181, 95);;
     input{
         background: ${props => props.disabled ? "grey" : "#ffffff"};
         color: ${props => props.disabled ? "#AFAFAF" : "grey"};
@@ -79,13 +94,13 @@ const Form = styled.form`
         border-radius: 5px;
         ::placeholder{
             font-size: 18px;
-            color: #DBDBDB;}
+            color: #C0C0C0;}
         }
 `
 const Cadastrar = styled.button`
     width: 303px;
     height: 45px;
-    background: #A328D6;
+    background: rgba(59, 155, 170);
     border: none;
     border-radius: 4.63636px;
     text-decoration: none; 
@@ -93,7 +108,7 @@ const Cadastrar = styled.button`
     align-items:center;
     justify-content:center;
     
-    font-family: 'Raleway';
+    font-family: 'Shippori Antique';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -108,7 +123,7 @@ const Cadastrar = styled.button`
 const Loguese = styled.div`
     margin-top:35px;
     p{
-        font-family: 'Raleway';
+        font-family: 'Shippori Antique';
         font-style: normal;
         font-weight: 700;
         font-size: 15px;
