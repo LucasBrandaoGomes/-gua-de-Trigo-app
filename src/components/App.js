@@ -3,17 +3,18 @@ import  {  BrowserRouter ,  Routes ,  Route  }  from  'react-router-dom' ;
 import  {  useState  }  from  'react' ;
 import SignUp from './SignUp.js'
 import SignIn from "./SignIn.js";
-// import InfoLoginContext from "../contexts/InfoLogin";
+import Context from "../contexts/Context.js";
 import Init from "./Init.js";
 import Menu from './Menu.js'
 import Bag from './Bag.js'
 
 export default function App(){
     
-    // const [infoLogin, setInfoLogin] = useState({});
+    const [infoLogin, setInfoLogin] = useState({});
+    const [infoBag, setInfoBag] = useState({});
     
     return(
-        // <InfoLoginContext.Provider value = {{infoLogin , setInfoLogin}}>
+        <Context.Provider value = {{infoLogin , setInfoLogin, infoBag, setInfoBag}}>
             <BrowserRouter>
                    
                             <Routes>
@@ -26,7 +27,7 @@ export default function App(){
                         
                     
             </BrowserRouter>
-        // </InfoLoginContext.Provider>
+        </Context.Provider>
     )
 }
 
