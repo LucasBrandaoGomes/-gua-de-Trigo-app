@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import  { useState } from  "react"
 import { ThreeDots } from "react-loader-spinner";
 
-export default function Signup(){
+export default function SignUp(){
     
     const navigate = useNavigate();
     const [email, setEmail] = useState("")
@@ -52,7 +52,7 @@ export default function Signup(){
     }
 
     return(
-        <>
+        <Container>
             <h1>ÁGUA DE TRIGO</h1>
             <Form onSubmit={SubmitSignUp} >
                 
@@ -72,9 +72,13 @@ export default function Signup(){
                     <p>Já tem uma conta?Faça login</p>
                 </Link>
             </Loguese>
-        </>
+        </Container>
    )
 }
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;`
 
 const Form = styled.form`
     display:flex;

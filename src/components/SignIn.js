@@ -5,7 +5,7 @@ import axios from "axios"
 import { ThreeDots } from "react-loader-spinner";
 import {useNavigate} from 'react-router-dom';
 import { useContext } from "react";
-import InfoLoginContext from "../contexts/InfoLogin"
+import Context from "../contexts/Context.js"
 
 export default function SignIn(){
 
@@ -14,7 +14,7 @@ export default function SignIn(){
     const [password, setPassword] = useState("")
     const [disableButton,setDisableButton] = useState(false)
     
-    const { setInfoLogin } = useContext(InfoLoginContext);
+    const { setInfoLogin } = useContext(Context);
 
     function SubmitLogin(event){
         event.preventDefault();
@@ -41,7 +41,7 @@ export default function SignIn(){
     }
 
     return(
-        <>  
+        <Container>  
             <h1>ÁGUA DE TRIGO</h1>
             <Form onSubmit={SubmitLogin}>
                 <input type="email" disabled={disableButton} placeholder="email"  value={email} onChange={e => setEmail(e.target.value)} required/>
@@ -53,9 +53,14 @@ export default function SignIn(){
                     <p>Não tem uma conta?Cadastre-se</p>
                 </Link>
             </Cadastrese>
-        </>
+        </Container>
    )
 }
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;`
+
 
 const Form = styled.form`
 display:flex;
