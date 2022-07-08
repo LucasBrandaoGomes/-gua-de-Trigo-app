@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import { useContext } from "react";
 import InfoLoginContext from "../contexts/InfoLogin"
 
-export default function Login(){
+export default function SignIn(){
 
     const navigate = useNavigate();
     const [email, setEmail] = useState("")
