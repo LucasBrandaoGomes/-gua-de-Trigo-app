@@ -1,39 +1,38 @@
 
-import styled from "styled-components"
-import { useState } from  "react"
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SignUp from './SignUp'
-import SignIn from "./SignIn";
-import InfoLoginContext from "../contexts/InfoLogin";
-import Init from "./Init";
-import Menu from './Menu'
-import Bag from './Bag'
+import  {  BrowserRouter ,  Routes ,  Route  }  from  'react-router-dom' ;
+import  {  useState  }  from  'react' ;
+import SignUp from './SignUp.js'
+import SignIn from "./SignIn.js";
+import Context from "../contexts/Context.js";
+import Init from "./Init.js";
+import Menu from './Menu.js'
+import Bag from './Bag.js'
 
 export default function App(){
     
     const [infoLogin, setInfoLogin] = useState({});
+    const [infoBag, setInfoBag] = useState({});
     
     return(
-        <InfoLoginContext.Provider value = {{infoLogin , setInfoLogin}}>
+        <Context.Provider value = {{infoLogin , setInfoLogin, infoBag, setInfoBag}}>
             <BrowserRouter>
-                    <div className="root">
-                        <Container>
+                   
                             <Routes>
-                                {/*<Route path="/" element={<Init />}/>*/}
+                                <Route path="/" element= {<Init />}/>
                                 <Route path="/sign-in" element={<SignIn />}/>
                                 <Route path="/sign-up" element={<SignUp />}/>
                                 <Route path="/menu" element={<Menu />}/>
                                 <Route path="/bag" element={<Bag />}/>
                             </Routes>
-                        </Container>
-                    </div>
+                        
+                    
             </BrowserRouter>
-        </InfoLoginContext.Provider>
+        </Context.Provider>
     )
 }
 
-const Container = styled.div`
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    `
+
+
+
+
+
