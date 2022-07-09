@@ -4,6 +4,8 @@ import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import  { useState } from  "react"
 import { ThreeDots } from "react-loader-spinner";
+import logoIcon from "../images/logoIcon.jpeg"
+import line from "../images/line.png"
 
 export default function SignUp(){
     
@@ -52,17 +54,21 @@ export default function SignUp(){
     }
 
     return(
-        <ContainerAuth>
-            <h1>ÁGUA DE TRIGO</h1>
+        <ContainerAuth >
+            <h1>Água de Trigo</h1>
             <Form onSubmit={SubmitSignUp} >
-                
                 <input type="text" disabled={disableButton} placeholder="nome" value={name} onChange={e => setName(e.target.value)} required/>
                 <input type="email" disabled={disableButton} placeholder="email"  value={email} onChange={e => setEmail(e.target.value)} required/>
                 <input type="text" disabled={disableButton} placeholder="rua" value={street} onChange={e => setStreet(e.target.value)} required/>
-                <input type="text" disabled={disableButton} placeholder="número" value={number} onChange={e => setNumber(e.target.value)} required/>
-                <input type="text" disabled={disableButton} placeholder="bairro" value={neighborhood} onChange={e => setNeighborhood(e.target.value)} required/>
-                <input type="text" disabled={disableButton} placeholder="cidade" value={city} onChange={e => setCity(e.target.value)} required/>
-                <input type="text" disabled={disableButton} placeholder="estado" value={state} onChange={e => setState(e.target.value)} required/>
+                <div>
+                    <input type="text" disabled={disableButton} placeholder="bairro" value={neighborhood} onChange={e => setNeighborhood(e.target.value)} required/>    
+                        <input type="text" disabled={disableButton} placeholder="n°" value={number} 
+                    onChange={e => setNumber(e.target.value)} required/>
+                </div>
+                <div>
+                    <input type="text" disabled={disableButton} placeholder="cidade" value={city} onChange={e => setCity(e.target.value)} required/>
+                     <input type="text" disabled={disableButton} placeholder="estado" value={state} onChange={e => setState(e.target.value)} required/>
+                </div>
                 <input type="password" disabled={disableButton} placeholder="senha" value={password} onChange={e => setPassword(e.target.value)} required/>
                 <input type="password" disabled={disableButton} placeholder="confirmação de senha" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} required/>
                 <Cadastrar type="submit" disabled={disableButton}>{disableButton ? <ThreeDots color="white"/> : "Cadastrar"}</Cadastrar>
@@ -72,6 +78,12 @@ export default function SignUp(){
                     <p>Já tem uma conta?Faça login</p>
                 </Link>
             </Loguese>
+            <RetornaMenu>
+                    <a href="menu">
+                        <img src={logoIcon} alt="icone-logo direciona para catálogo"/>
+                    </a>
+                    <p>Ver produtos</p>
+            </RetornaMenu>
         </ContainerAuth>
    )
 }
@@ -84,6 +96,11 @@ const ContainerAuth = styled.div`
     align-items:center;
     justify-content:center;
     background-color: #D37545;
+    background-image: url(${line}) ;
+    background-repeat: no-repeat;
+    background-size:125%;
+    background-position-x: center;
+    background-position-y: 85%;
 
     h1{
     font-family: 'Shippori Antique';
@@ -98,7 +115,6 @@ const ContainerAuth = styled.div`
 
     }
 `
-
 const Form = styled.form`
     display:flex;
     flex-direction: column;
@@ -120,6 +136,28 @@ const Form = styled.form`
             font-size: 30px;
             color: #C0C0C0;}
         }
+    div:nth-child(4){
+        display:flex;
+
+        input:nth-child(1){
+            width:370px;
+        }
+        input:nth-child(2){
+            width:100px;
+            margin-left:5px;
+        }
+    }
+    div:nth-child(5){
+        display:flex;
+
+        input:nth-child(1){
+            width:235px;
+        }
+        input:nth-child(2){
+            width:230px;
+            margin-left:5px;
+        }
+    }
 `
 const Cadastrar = styled.button`
     border: none;     
@@ -154,6 +192,34 @@ const Loguese = styled.div`
         font-style: normal;
         font-weight: 700;
         font-size: 22px;
+        line-height: 18px;
+
+        color: #fff5e0;
+    }
+`
+const RetornaMenu = styled.div`
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: center;
+    
+    &:hover{
+            cursor:pointer;
+        }
+
+    img{
+        width: 60px;
+        height: auto;
+        cursor: pointer;
+        border-radius: 50%;
+
+    }
+    p{
+        font-family: 'Shippori Antique';
+        font-style: italic;
+        font-weight: 700;
+        font-size: 15px;
         line-height: 18px;
 
         color: #fff5e0;
