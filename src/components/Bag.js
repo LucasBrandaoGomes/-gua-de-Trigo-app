@@ -1,12 +1,17 @@
 import styled from "styled-components"
 import {useState} from "react"
 import { ThreeDots } from "react-loader-spinner";
+//import { useContext } from "react";
+//import Context from "../contexts/Context";
 
 export default function Bag(){
 
+    //const { infoBag, setInfoBag } = useContext(Context);
     const [disableButton,setDisableButton] = useState(false)
 
-    const myProducts = [
+
+    //trocar myProducts por infoBag
+    var myProducts = [
         {
         _id:"62c752a0e642f3e252301431",
         name:"Focaccia Alecrim",
@@ -58,9 +63,19 @@ export default function Bag(){
         setDisableButton(true);
     
     }
+    function OverBalance() {
+        let soma=0;
+        let x;
+        for (let i=0; i<myProducts.length; i++){
+            x = Number.parseFloat(myProducts[i].amount)*Number.parseFloat(myProducts[i].price);
+            soma+=x;
+        }
+        return soma;
+    }
 
-    function Product({url, name, details,amount, price}){
-        let subtotal = Number.parseFloat(amount)*Number.parseFloat(price)
+    function Product({url, name, details,amount, price, id}){
+
+        let subtotal = Number.parseFloat(amount)*Number.parseFloat(price);
 
         return(
             <>
@@ -77,32 +92,51 @@ export default function Bag(){
                                 <p>R$ {subtotal}</p>
                             </div>
                             <div>
-                                <ion-icon onClick={Add} name="add-outline"></ion-icon>
-                                <ion-icon onClick={Deduct} name="remove-circle-outline"></ion-icon>
+                                <ion-icon onClick={() => Add({id})} name="add-outline"></ion-icon>
+                                <ion-icon name="remove-circle-outline"></ion-icon>
                             </div>
                 </ProdutoInfo>
             </>
         )
     }
-    function Add(){
+    function Add({id}){
 
-    }
-
-    function Deduct(){
+        const findProduct = myProducts.find(item => item._id === id);
+        const index = myProducts.indexOf(findProduct)
+        const newAmount = Number.parseFloat(findProduct.amount) +1
         
-    }
+        function update(array, index, newValue ) {
+        array[index].amount = newValue;
+        }
+        update(myProducts, index, newAmount);
+        console.log(myProducts);
+        }
+    
+    
+    {/*function Deduct({id}){
+        const findProduct = myProducts.map(item => item._id === id);
+        if (findProduct.amount === 0){
+
+        }
+        let newAmount = findProduct.amout -1
+        setInfoBag({amount: newAmount}) 
+    }*/}
+    
 
     return (
         <>  
             <ContainerBag>
-                <BagHeader><h1>Minha sacola</h1></BagHeader>
+                <BagHeader>
+                    <h1>Minha sacola</h1>
+                    <div><ion-icon name="close-outline"></ion-icon></div>
+                </BagHeader>
                 <Produto>
-                    {myProducts.map(product => <Product url={product.url} name={product.name} details={product.details} amount={product.amount} price={product.price}></Product>)}
+                    {myProducts.map(product => <Product id={product._id} url={product.url} name={product.name} details={product.details} amount={product.amount} price={product.price}></Product>)}
                 </Produto>
                 <BagFooter>
                     <Purchase>
                         <p>TOTAL</p>
-                        <p>VALOR</p>
+                        <p>{OverBalance()}</p>
                     </Purchase>
                     <div>
                         <ContinuarParaPagamento onClick={SubmitOrder} disabled={disableButton}>{disableButton ? <ThreeDots color="white"/> : "Continuar para pagamento"}</ContinuarParaPagamento>
@@ -112,13 +146,28 @@ export default function Bag(){
         </>
     )
 }
+const ContainerBag = styled.div`
+    display:flex;
+    flex-direction:column;
+    background-color: #fff5e0;
+    width: 29%;
+    height:100vh;
+    position:fixed;
+    right:0;
+`
+
 const BagHeader = styled.div`
-    width:100%;
+    width:29%;
     height:5%;
     position: fixed;
     top: 0;
-    left:0;
     margin-top: 15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-left:10px;
+    padding-right:20px;
+
     h1{
         text-align:center;
         font-family: 'Shippori Antique';
@@ -129,23 +178,21 @@ const BagHeader = styled.div`
 
         color: #3B9BAA;
     }
-
-`
-const ContainerBag = styled.div`
-    display:flex;
-    flex-direction:column;
-    padding-left:15px;
-    padding-right:10px;
-    background-color: #fff5e0;
-    width: 375px;
-    height:100vh;
-
+    ion-icon{
+            color: #000000;
+            font-size: 32px;
+            &:hover{
+            cursor:pointer;
+            }
+    }
 `
 const Produto = styled.div`
     display:flex;
     flex-direction:column;
     margin-bottom:20px;
     margin-top:20%;
+    padding-left:15px;
+    padding-right:10px;
     height:61%;
     overflow: hidden;
     overflow-y: scroll;
@@ -218,9 +265,11 @@ const BagFooter = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:center;
+    align-items:center;
+    width:375px;
     position:fixed;
     bottom: 0;
-    margin-bottom:10px;
+    margin-bottom:25px;
     
 `
 const ContinuarParaPagamento = styled.button`
@@ -253,9 +302,12 @@ const Purchase = styled.div`
     display:flex;
     justify-content: space-between;
     align-items:center;
-    border-top:1px solid black;
-    border-bottom: 1px solid black;
+    width:100%;
+    border-top: 1px solid #D3D3D3;
+    border-bottom: 1px solid #D3D3D3;
     padding-top:20px;
     padding-bottom:20px;
+    padding-left:15px;
+    padding-right:10px;
     
 `
