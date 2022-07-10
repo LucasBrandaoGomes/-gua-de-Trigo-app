@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {useNavigate} from 'react-router-dom';
-import alecrim2 from "../images/alecrim2.jpg"
 import logoIcon from "../images/logoIcon.jpeg"
 import logo2 from "../images/logo2.jpeg"
 
@@ -114,7 +113,7 @@ const Container = styled.div `
         overflow-y: scroll;
         scroll-behavior: smooth;
         display: block;
-        margin-top:160px;        
+        margin-top:80px;        
         text-align: center;
         overflow: hidden;
     }`
@@ -122,7 +121,7 @@ const Container = styled.div `
 
 const Header = styled.div `
     width: 100%;
-    height: 170px;
+    height: 85px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -131,9 +130,9 @@ const Header = styled.div `
     top: 0;    
 
     img{
-        width: 90px;
+        width: 45px;
         height: auto;
-        margin-left: 40px;
+        margin-left: 20px;
         cursor: pointer;
         border-radius: 50%;
     }    
@@ -148,26 +147,25 @@ const Header = styled.div `
             font-family: 'Shippori Antique';
             font-style: normal;
             font-weight: 700;
-            font-size: 30px;            
+            font-size: 15px;            
             text-align: center;
-            color: #FFFFFF;
-            margin-right: 40px;
+            color: #FFF5E0;
+            margin-right: 20px;
             display: flex;        
             justify-content: center;
             align-items: center;
-            padding: 18px 122px;
+            padding: 9px 61px;
                  
-            width: 180px;
-            height: 72px;
+            width: 90px;
+            height: 36px;
             background: transparent;
-            border: 1px solid #FFFFFF;
+            border: 1px solid #FFF5E0;
             border-radius: 8px;
             cursor: pointer;
 
             :hover{
                 color: #D37545;
-                background: #fff5e0;
-                border: 1px solid #fff5e0;
+                background: #fff5e0;                
             }
         }
         a {    
@@ -175,10 +173,10 @@ const Header = styled.div `
             font-family: 'Shippori Antique';
             font-style: normal;
             font-weight: 700;
-            font-size: 30px;            
+            font-size: 15px;            
             text-align: center;
             color: #FFFFFF;
-            margin-right: 30px;            
+            margin-right: 15px;            
             cursor: pointer;
         }
     }`
@@ -201,8 +199,7 @@ const Page1 = styled.div`
         font-family: 'Shippori Antique';
         font-style: normal;
         font-weight: 700;
-        font-size: 40px;
-        line-height: 26px;
+        font-size: 20px;        
         text-align: center;
         color: #D37545;
         margin-top: 15%;
@@ -212,10 +209,9 @@ const Page1 = styled.div`
         display: flex;        
         justify-content: center;
         align-items: center;
-        padding: 18px 122px;
-        gap: 10px;        
-        width: 470px;
-        height: 100px;
+        padding: 9px 61px;               
+        width: 235px;
+        height: 50px;
         background: #fff5e0;
         
         border-radius: 8px;
@@ -235,33 +231,33 @@ div{
 
     h1{
         font-family: 'Shippori Antique';
-        font-size: 65px;
+        font-size: 32px;
         font-weight: 700;
         color: #D37545;
         text-align: left;
-        padding: 20px 5%;
+        padding: 10px 5%;
     }
 
     p{
         font-family: 'Shippori Antique';
-        font-size: 50px;            
+        font-size: 25px;            
         color: #D37545;
         text-align: left;
-        padding: 20px 5%;
+        padding: 10px 5%;
         
     }
 }`
 
 const Footer = styled.footer` 
     position: absolute;
-    bottom: 20px;   
+    bottom: 10px;   
     width: 100%;
     h2{      
         font-family: 'Shippori Antique';
-        font-size: 30px;            
+        font-size: 15px;            
         color: #D37545;
         text-align: left;
-        padding: 15px 1%;
+        padding: 7px 1%;
     }
     
 `
