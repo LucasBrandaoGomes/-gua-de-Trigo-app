@@ -11,7 +11,7 @@ import Bag from './Bag.js'
 export default function App(){
     
     const [infoLogin, setInfoLogin] = useState();
-    const [infoBag, setInfoBag] = useState();
+    const [infoBag, setInfoBag] = useState([]);
     
     return(
         <Context.Provider value = {{infoLogin , setInfoLogin, infoBag, setInfoBag}}>
