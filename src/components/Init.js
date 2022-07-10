@@ -40,7 +40,7 @@ export default function Init(){
                     
                 <scroll-page id="page-1">
                     <Page1>
-                        <button onClick = {Menu}>Catálogo</button>
+                        <button onClick={Menu}>Catálogo</button>
                     </Page1>
                 </scroll-page>
                     
