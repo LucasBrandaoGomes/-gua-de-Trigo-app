@@ -106,22 +106,23 @@ const ContainerAuth = styled.div`
     font-family: 'Shippori Antique';
     font-style: normal;
     font-weight: 700;
-    font-size: 50px;
+    font-size: 40px;
     line-height: 31px;
 
     color: #fff5e0;
 
-    margin-bottom: 75px;
+    margin-bottom: 50px;
+    margin-top:25px;
 
     }
 `
 const Form = styled.form`
     display:flex;
     flex-direction: column;
-    width: 470px;
+    width: 28%;
     background-color: #D37545;
     input{
-        height:6vh;
+        height:5vh;
         background: ${props => props.disabled ? "grey" : "#fff5e0" };
         color: ${props => props.disabled ? "#AFAFAF" : "grey" };
         font-family: 'Lexend Deca';
@@ -133,17 +134,17 @@ const Form = styled.form`
         border: 1px solid #D5D5D5;
         border-radius: 5px;
         ::placeholder{
-            font-size: 30px;
+            font-size: 23px;
             color: #C0C0C0;}
         }
     div:nth-child(4){
         display:flex;
 
         input:nth-child(1){
-            width:370px;
+            width:75%;
         }
         input:nth-child(2){
-            width:100px;
+            width:25%;
             margin-left:5px;
         }
     }
@@ -151,10 +152,10 @@ const Form = styled.form`
         display:flex;
 
         input:nth-child(1){
-            width:235px;
+            width:65%;
         }
         input:nth-child(2){
-            width:230px;
+            width:35%;
             margin-left:5px;
         }
     }
@@ -164,7 +165,7 @@ const Cadastrar = styled.button`
         font-family: 'Shippori Antique';
         font-style: normal;
         font-weight: 700;
-        font-size: 40px;
+        font-size: 35px;
         line-height: 26px;
         text-align: center;
         color: #D37545;
@@ -174,8 +175,8 @@ const Cadastrar = styled.button`
         align-items: center;
         padding: 18px 122px;
         gap: 10px;        
-        width: 470px;
-        height: 75px;
+        width: 100%;
+        height: 9vh;
         background: #fff5e0;
         
         border-radius: 8px;
@@ -186,19 +187,19 @@ const Cadastrar = styled.button`
         }
 `
 const Loguese = styled.div`
-    margin-top:35px;
+    margin-top:30px;
     p{
         font-family: 'Shippori Antique';
         font-style: normal;
         font-weight: 700;
-        font-size: 22px;
+        font-size: 18px;
         line-height: 18px;
 
         color: #fff5e0;
     }
 `
 const RetornaMenu = styled.div`
-    margin-top:40px;
+    margin-top:30px;
     display:flex;
     flex-direction:column;
     justify-content:center;

@@ -219,7 +219,7 @@ const Catalog = styled.div`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    
+    padding-left:20px;
     
     margin-top: 90px;
         
