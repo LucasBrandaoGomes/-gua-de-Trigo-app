@@ -42,7 +42,7 @@ export default function SignUp(){
             }
         
 
-        const promise = axios.post("http://localhost:5000/sign-up", infoSignUp)
+        const promise = axios.post("https://api-aguadetrigo.herokuapp.com/sign-up", infoSignUp)
         
         promise
         .then(res =>{ 

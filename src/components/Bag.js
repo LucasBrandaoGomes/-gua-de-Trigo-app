@@ -35,7 +35,7 @@ export default function Bag({showBag, setShowBag}){
                         Authorization: `Bearer ${infoLogin.token}`
                     }
                 }
-            const promise = axios.post("http://localhost:5000/orders", newOrder, config)
+            const promise = axios.post("https://api-aguadetrigo.herokuapp.com/orders", newOrder, config)
             
             promise            
             .then(res => {
