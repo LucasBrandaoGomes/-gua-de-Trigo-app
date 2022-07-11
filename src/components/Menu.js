@@ -10,7 +10,24 @@ import Context from '../contexts/Context.js'
 export default function Menu(){
     const {infoLogin, infoBag, setInfoBag} = useContext(Context)
     const [products, setProducts] = useState([])
+    const navigate = useNavigate()
     // console.log(infoLogin)
+
+    function SignUp(){
+        navigate("/sign-up")
+    }
+
+    function SignIn(){
+        navigate("/sign-in")
+    }
+
+    function Init(){
+        navigate("/")
+    }
+
+    function Bag(){
+        navigate("/bag")
+    }
 
     useEffect(()=>{
         const promise = axios.get("http://localhost:5000/products")
@@ -26,7 +43,7 @@ export default function Menu(){
     }, [])  
     
     function Add(product){
-        setInfoBag ({...infoBag, product})    
+        setInfoBag ([...infoBag, product])    
            
     }
    
@@ -39,7 +56,7 @@ export default function Menu(){
     return(
         <Container>
             <Header>
-                <a href="#page-1">
+                <a href="#page-1" onClick={Init}>
                     <img src={logoIcon} alt="header-logo"/>
                     <span>ÁGUA DE TRIGO</span>
                 </a>
@@ -54,13 +71,13 @@ export default function Menu(){
                         <span>Olá {infoLogin.name}</span>
                     ):(
                     <>
-                        <button>Login</button>
-                        <button>Cadastro</button>
+                        <button onClick = {SignIn}>Login</button>
+                        <button onClick = {SignUp}>Cadastro</button>
                     </>
                     )            
                     }
                 </div>
-                <ion-icon name="cart-outline"></ion-icon>
+                <ion-icon name="cart-outline" onClick = {Bag}/>
                 
             </Header>
             <Catalog>
@@ -158,6 +175,14 @@ const Header = styled.div`
 
     div#user{
         display: flex;
+        span{
+            margin-left: 5px;
+            font-size: 17px;
+            font-weight: bold;
+            font-family: 'Shippori Antique';
+            text-decoration: none;
+            text-align: center;
+        }
         button{
             border: none;   
             font-family: 'Shippori Antique';
