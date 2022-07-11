@@ -31,14 +31,11 @@ export default function Menu(){
         navigate("/")
     }
 
-   
-
     useEffect(()=>{
         const promise = axios.get("http://localhost:5000/products")
         
         promise.then(res => {
             setProducts(res.data)
-            console.log(res.data)
         })
 
         promise.catch(err => {
@@ -47,15 +44,15 @@ export default function Menu(){
     }, [])  
     
     function Add(product){
-        setInfoBag ([...infoBag, product])    
-           
-    }
+        setInfoBag ([...infoBag, product])   
+
 
     const lowerSearch = search.toLowerCase();
     const filterProducts = products.filter((product)=>product.name.toLowerCase().includes(lowerSearch))   
 
+
     return(
-        <Container>
+        <Container disabled={showBag}>
             <Header>
                 <a href="#page-1" onClick={Init}>
                     <img src={logoIcon} alt="header-logo"/>
@@ -72,7 +69,7 @@ export default function Menu(){
                 <div id = "user">
                     {(infoLogin)? 
                     (
-                        <span>Olá {infoLogin.name}</span>
+                        <span>Olá, {infoLogin.name}</span>
                     ):(
                     <>
                         <button onClick = {SignIn}>Login</button>
@@ -112,7 +109,9 @@ const Container = styled.div`
     height: 100vh;   
     display: flex;
     background-color: #fff5e0;
-    flex-direction: column;`
+    flex-direction: column;
+    opacity: ${props => props.disabled ? 0.5 : 1 };
+    `
 
 const Header = styled.div`
     width: 100%;
@@ -139,8 +138,8 @@ const Header = styled.div`
             border-radius: 50%;
         }  
         span{
-            margin-left: 5px;
-            font-size: 17px;
+            margin-left: 7px;
+            font-size: 19px;
             font-weight: bold;
             font-family: 'Shippori Antique';
             text-decoration: none;
@@ -179,11 +178,12 @@ const Header = styled.div`
         display: flex;
         span{
             margin-left: 5px;
-            font-size: 17px;
+            font-size: 19px;
             font-weight: bold;
             font-family: 'Shippori Antique';
             text-decoration: none;
             text-align: center;
+            color:#fff5e0;
         }
         button{
             border: none;   
@@ -215,6 +215,9 @@ const Header = styled.div`
     ion-icon{
         color: #FFF5E0;
         font-size: 35px;
+        &:hover{
+            cursor:pointer;
+        }
     }
     
     `
@@ -223,7 +226,7 @@ const Catalog = styled.div`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    
+    padding-left:20px;
     
     margin-top: 90px;
         
