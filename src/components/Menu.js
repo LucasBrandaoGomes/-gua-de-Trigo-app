@@ -4,7 +4,6 @@ import axios from 'axios'
 import  { useNavigate }  from  'react-router-dom' 
 import  {  useState, useContext, useEffect }  from  "react"
 import logoIcon from '../images/logoIcon.jpeg'
-import alecrim2 from '../images/alecrim2.jpg';
 import Context from '../contexts/Context.js'
 import Bag from './Bag.js'
 
@@ -30,8 +29,6 @@ export default function Menu(){
         navigate("/")
     }
 
-   
-
     useEffect(()=>{
         const promise = axios.get("http://localhost:5000/products")
         
@@ -48,13 +45,10 @@ export default function Menu(){
     function Add(product){
         setInfoBag ([...infoBag, product])    
            
-    }
-   
-    console.log(infoBag)
-    
+    }    
 
     return(
-        <Container>
+        <Container disabled={showBag}>
             <Header>
                 <a href="#page-1" onClick={Init}>
                     <img src={logoIcon} alt="header-logo"/>
@@ -109,7 +103,9 @@ const Container = styled.div`
     height: 100vh;   
     display: flex;
     background-color: #fff5e0;
-    flex-direction: column;`
+    flex-direction: column;
+    opacity: ${props => props.disabled ? 0.5 : 1 };
+    `
 
 const Header = styled.div`
     width: 100%;
@@ -212,6 +208,9 @@ const Header = styled.div`
     ion-icon{
         color: #FFF5E0;
         font-size: 35px;
+        &:hover{
+            cursor:pointer;
+        }
     }
     
     `

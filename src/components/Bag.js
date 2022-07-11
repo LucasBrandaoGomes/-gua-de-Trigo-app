@@ -3,32 +3,60 @@ import {useState} from "react"
 import { ThreeDots } from "react-loader-spinner";
 import { useContext } from "react";
 import Context from "../contexts/Context";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Bag({setShowBag}){
+export default function Bag({showBag, setShowBag}){
 
-    const {infoBag, setInfoBag} = useContext(Context);
-    const [reload, setReload] = useState(false);
+    const navigate = useNavigate();
+    const {infoBag, setInfoBag, infoLogin} = useContext(Context);
     const [disableButton,setDisableButton] = useState(false)
 
     function SubmitOrder(event){
-        
+    
         event.preventDefault();
         setDisableButton(true);
-    
+
+        const newOrder = {...infoBag}
+        console.log(newOrder)
+         const config = {
+                headers: {
+                    Authorization: `Bearer ${infoLogin.token}`
+                }
+            }       
+        const promise = axios.post("http://localhost:5000/orders", newOrder, config)
+        
+        promise            
+        .then(res => {
+            console.log("Pedido finalizado")
+            navigate("/menu");
+
+        })
+        .catch(err=> {
+            if (err === 401){
+                alert("Efetue o login");
+                navigate('/sign-up');
+            }else{
+                alert("Erro ao enviar pedido");
+                setDisableButton(false)}
+        });
     }
+    
+    
     function OverBalance() {
         let soma=0;
         let x;
         for (let i=0; i<infoBag.length; i++){
-            x = Number.parseFloat(infoBag[i].product.price);
+            x = Number.parseFloat(infoBag[i].price);
             soma+=x;
         }
         return soma;
     }
 
-    function Product({url, name, details, price}){
+    function Product({url, name, details, price, id}){
         let subtotal = Number.parseFloat(price);
-        console.log(infoBag)
+        const newOrder = {infoBag}
+        console.log(newOrder)
         return(
             <>
                 <ProdutoInfo>
@@ -44,47 +72,27 @@ export default function Bag({setShowBag}){
                                 <p></p>
                             </div>
                             <div>
-                                <ion-icon name="add-outline"></ion-icon>
-                                <ion-icon name="remove-circle-outline"></ion-icon>
+                                <ion-icon onClick={() => DeleteIten({id})} name="trash-outline"></ion-icon>
                             </div>
                 </ProdutoInfo>
             </>
         )
     }
-    {/*function Add({id}){
 
-        const findProduct = infoBag.find(item => item._id === id);
-        const index = infoBag.indexOf(findProduct)
-        const newAmount = Number.parseFloat(findProduct.amount) +1
-        
-        function update(array, index, newValue ) {
-            infoBag.map(item => item._id === id
-                
-            );
-        }
-        update(infoBag, index, newAmount);
-        console.log(infoBag);
-        }*/}
-    
-    
-    {/*function Deduct({id}){
-        const findProduct = infoBag.map(item => item._id === id);
-        if (findProduct.amount === 0){
-
-        }
-        let newAmount = findProduct.amout -1
-        setInfoBag({amount: newAmount}) 
-    }*/}
+    function DeleteIten({id}){
+        const newBag = infoBag.filter(item => item._id !== id);
+        setInfoBag(newBag)
+    }
 
     return (
         <>  
-            <ContainerBag>
+            <ContainerBag disabled={showBag}>
                 <BagHeader>
                     <h1>Minha sacola</h1>
                     <div><ion-icon name="close-outline" onClick={()=>setShowBag(false)}></ion-icon></div>
                 </BagHeader>
                 <Produto>
-                    {infoBag.map(product => <Product url={product.product.url} name={product.product.name} details={product.product.details} price={product.product.price}></Product>)}
+                    {infoBag.map(product => <Product url={product.url} name={product.name} details={product.details} price={product.price} id={product._id}></Product>)}
                 </Produto>
                 <BagFooter>
                     <Purchase>
@@ -176,9 +184,6 @@ const ProdutoInfo = styled.div`
 
     }
     div:nth-child(3){
-        display:flex;
-        flex-direction:column;
-        justify-content:space-around;
         margin-right:8px;
         width:30%;
 
@@ -194,10 +199,6 @@ const ProdutoInfo = styled.div`
     }
 
     div:nth-child(4){
-        display:flex;
-        flex-direction:column;
-        justify-content: space-around;
-        
         ion-icon{
             color: #3B9BAA;
             font-size: 24px;
