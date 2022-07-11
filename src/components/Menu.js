@@ -46,7 +46,8 @@ export default function Menu(){
     function Add(product){
         setInfoBag ([...infoBag, product])   
 
-
+    }
+    
     const lowerSearch = search.toLowerCase();
     const filterProducts = products.filter((product)=>product.name.toLowerCase().includes(lowerSearch))   
 
