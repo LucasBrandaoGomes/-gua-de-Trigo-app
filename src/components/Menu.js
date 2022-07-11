@@ -240,10 +240,8 @@ const Header = styled.div`
         height: 20px;
         border-radius: 50%;
         background-color: #fff5e0;
-    }
+    }      
 
-        
-    }
     
     `
 
