@@ -18,30 +18,43 @@ export default function Bag({showBag, setShowBag}){
         setDisableButton(true);
 
         const newOrder = {...infoBag}
-        console.log(newOrder)
-         const config = {
-                headers: {
-                    Authorization: `Bearer ${infoLogin.token}`
-                }
-            }       
-        const promise = axios.post("http://localhost:5000/orders", newOrder, config)
-        
-        promise            
-        .then(res => {
-            console.log("Pedido finalizado")
-            navigate("/menu");
 
-        })
-        .catch(err=> {
-            if (err === 401){
-                alert("Efetue o login");
-                navigate('/sign-up');
-            }else{
-                alert("Erro ao enviar pedido");
-                setDisableButton(false)}
-        });
+        if (!infoLogin?.token){
+            alert("Efetue o login para finalizar a compra");
+            navigate("/sign-in");
+        }else{
+
+            if (infoBag.length ===0){
+                alert("Sua sacola está vazia")
+                setDisableButton(false)
+                return;
+            }
+
+            const config = {
+                    headers: {
+                        Authorization: `Bearer ${infoLogin.token}`
+                    }
+                }
+            const promise = axios.post("http://localhost:5000/orders", newOrder, config)
+            
+            promise            
+            .then(res => {
+                alert("Pedido finalizado");
+                setDisableButton(false);
+                navigate("/menu");
+                setShowBag(false)
+
+            })
+            .catch(err=> {
+                if (err === 401){
+                    alert("Efetue o login");
+                    navigate('/sign-up');
+                }else{
+                    alert("Erro ao enviar pedido");
+                    setDisableButton(false)}
+            });
+        }
     }
-    
     
     function OverBalance() {
         let soma=0;
@@ -55,8 +68,6 @@ export default function Bag({showBag, setShowBag}){
 
     function Product({url, name, details, price, id}){
         let subtotal = Number.parseFloat(price);
-        const newOrder = {infoBag}
-        console.log(newOrder)
         return(
             <>
                 <ProdutoInfo>

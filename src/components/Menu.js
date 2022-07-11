@@ -34,7 +34,6 @@ export default function Menu(){
         
         promise.then(res => {
             setProducts(res.data)
-            console.log(res.data)
         })
 
         promise.catch(err => {
@@ -62,7 +61,7 @@ export default function Menu(){
                 <div id = "user">
                     {(infoLogin)? 
                     (
-                        <span>Olá {infoLogin.name}</span>
+                        <span>Olá, {infoLogin.name}</span>
                     ):(
                     <>
                         <button onClick = {SignIn}>Login</button>
@@ -132,8 +131,8 @@ const Header = styled.div`
             border-radius: 50%;
         }  
         span{
-            margin-left: 5px;
-            font-size: 17px;
+            margin-left: 7px;
+            font-size: 19px;
             font-weight: bold;
             font-family: 'Shippori Antique';
             text-decoration: none;
@@ -172,11 +171,12 @@ const Header = styled.div`
         display: flex;
         span{
             margin-left: 5px;
-            font-size: 17px;
+            font-size: 19px;
             font-weight: bold;
             font-family: 'Shippori Antique';
             text-decoration: none;
             text-align: center;
+            color:#fff5e0;
         }
         button{
             border: none;   

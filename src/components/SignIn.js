@@ -40,7 +40,6 @@ export default function SignIn(){
         })
         .catch(err=> {
             alert("Erro Login");
-            console.log(err)
             setDisableButton(false)})
     }
 
