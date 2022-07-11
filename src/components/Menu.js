@@ -4,28 +4,40 @@ import axios from 'axios'
 import  { useNavigate }  from  'react-router-dom' 
 import  {  useState, useContext, useEffect }  from  "react"
 import logoIcon from '../images/logoIcon.jpeg'
+import alecrim2 from '../images/alecrim2.jpg';
 import Context from '../contexts/Context.js'
-import Bag from './Bag'
-
+import Bag from './Bag.js'
 
 export default function Menu(){
-
     const {infoLogin, infoBag, setInfoBag} = useContext(Context)
     const [products, setProducts] = useState([])
-    const [showBag, setShowBag] = useState(false)
-    const showOrHide = () => {
-        if (showBag){
-            setShowBag(false);
-        }else{
-            setShowBag(true)
-        }
-    
+    const navigate = useNavigate()
+    const  [ showBag ,  setShowBag ]  =  useState ( false )    
+
+    function  showOrHide () {        
+        setShowBag  (  !  showBag  )      
     }
+
+    function SignUp(){
+        navigate("/sign-up")
+    }
+
+    function SignIn(){
+        navigate("/sign-in")
+    }
+
+    function Init(){
+        navigate("/")
+    }
+
+   
+
     useEffect(()=>{
         const promise = axios.get("http://localhost:5000/products")
         
         promise.then(res => {
-            setProducts([...res.data])
+            setProducts(res.data)
+            console.log(res.data)
         })
 
         promise.catch(err => {
@@ -35,29 +47,16 @@ export default function Menu(){
     
     function Add(product){
         setInfoBag ([...infoBag, product])    
+           
     }
-       
-    function OneProduct({id, url, name, details, price, product}){
-        console.log(products)
-        return (
-            <>
-                <Product key={id}>
-                    <img src={url} alt="produto" />
-                    <h1>{name}</h1>
-                    <div> 
-                        <h2>{details}</h2>
-                        <h2>R${price}</h2>
-                    </div>
-                    <button onClick={()=> Add({product})}>Adicionar</button>
-                </Product>
-            </>
-        )
-    }
+   
+    console.log(infoBag)
+    
 
     return(
         <Container>
             <Header>
-                <a href="#page-1">
+                <a href="#page-1" onClick={Init}>
                     <img src={logoIcon} alt="header-logo"/>
                     <span>ÁGUA DE TRIGO</span>
                 </a>
@@ -72,24 +71,35 @@ export default function Menu(){
                         <span>Olá {infoLogin.name}</span>
                     ):(
                     <>
-                        <button>Login</button>
-                        <button>Cadastro</button>
+                        <button onClick = {SignIn}>Login</button>
+                        <button onClick = {SignUp}>Cadastro</button>
                     </>
                     )            
                     }
                 </div>
-                <ion-icon onClick={showOrHide} name="cart-outline"></ion-icon>
+                <ion-icon name="cart-outline" onClick = {showOrHide}/>
                 
             </Header>
             <Catalog>
                 <h1>Itens</h1>
                 <div>
-                    {products.map(product =>
-                    <OneProduct id={product.id} url={product.url} name={product.name} details={product.details} price={product.price} product={product}></OneProduct> 
-                    )}
-                </div>
+                {products.map((product)=>(
+                <Product key = {product._id}>
+                    <img src={product.url} alt="produto" />
+                    <h1>{product.name}</h1>
+                    <div> 
+                        <h2>{product.details}</h2>
+                        <h2>R${product.price}</h2>
+                    </div>
+                    <button onClick={()=> Add(product)}>Adicionar</button>
+                </Product>
+                ))}
+                </div>      
             </Catalog>
-            { showBag ? <Bag></Bag> : null }
+            
+            {showBag? <Bag setShowBag={setShowBag}/> : null} 
+            
+
         </Container>
     )
 }
@@ -164,6 +174,14 @@ const Header = styled.div`
 
     div#user{
         display: flex;
+        span{
+            margin-left: 5px;
+            font-size: 17px;
+            font-weight: bold;
+            font-family: 'Shippori Antique';
+            text-decoration: none;
+            text-align: center;
+        }
         button{
             border: none;   
             font-family: 'Shippori Antique';

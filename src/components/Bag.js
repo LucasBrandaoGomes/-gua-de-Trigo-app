@@ -4,7 +4,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { useContext } from "react";
 import Context from "../contexts/Context";
 
-export default function Bag(){
+export default function Bag({setShowBag}){
 
     const {infoBag, setInfoBag} = useContext(Context);
     const [reload, setReload] = useState(false);
@@ -81,7 +81,7 @@ export default function Bag(){
             <ContainerBag>
                 <BagHeader>
                     <h1>Minha sacola</h1>
-                    <div><ion-icon name="close-outline"></ion-icon></div>
+                    <div><ion-icon name="close-outline" onClick={()=>setShowBag(false)}></ion-icon></div>
                 </BagHeader>
                 <Produto>
                     {infoBag.map(product => <Product url={product.product.url} name={product.product.name} details={product.product.details} price={product.product.price}></Product>)}
