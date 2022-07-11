@@ -12,15 +12,7 @@ export default function Menu(){
     const {infoLogin, infoBag, setInfoBag} = useContext(Context)
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
-    const  [ showBag ,  setShowBag ]  =  useState ( false )
-    // const  showOrHide  =  ( )  =>  {
-    //     if  ( showBag ) {
-    //         setShowBag ( false ) ;
-    //     } else {
-    //         setShowBag ( true )
-    //     }
-    
-    // }
+    const  [ showBag ,  setShowBag ]  =  useState ( false )    
 
     function  showOrHide () {        
         setShowBag  (  !  showBag  )      
@@ -38,9 +30,7 @@ export default function Menu(){
         navigate("/")
     }
 
-    function Bag(){
-        navigate("/bag")
-    }
+   
 
     useEffect(()=>{
         const promise = axios.get("http://localhost:5000/products")
@@ -61,10 +51,7 @@ export default function Menu(){
     }
    
     console.log(infoBag)
-        
-            
- 
-      
+    
 
     return(
         <Container>
@@ -109,11 +96,9 @@ export default function Menu(){
                 ))}
                 </div>      
             </Catalog>
-            {/* { showBag ? < Bag > </Bag> : null } */}
-            {showBag? <Bag/> : null} 
-            {/* < Modal  isOpen  =  { escondido }  overlayClassName =  "modal-overlay"  >
-                < TelaConfirmacao  setEscondido = { setEscondido }  cartao = { cartao }  plano = { plano } / >
-            < / Modal > */}
+            
+            {showBag? <Bag setShowBag={setShowBag}/> : null} 
+            
 
         </Container>
     )

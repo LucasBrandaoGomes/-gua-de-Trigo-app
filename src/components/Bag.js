@@ -7,8 +7,6 @@ import Context from "../contexts/Context";
 export default function Bag({setShowBag}){
 
     const {infoBag, setInfoBag} = useContext(Context);
-
-    console.log(infoBag)
     const [reload, setReload] = useState(false);
     const [disableButton,setDisableButton] = useState(false)
 
@@ -22,16 +20,15 @@ export default function Bag({setShowBag}){
         let soma=0;
         let x;
         for (let i=0; i<infoBag.length; i++){
-            x = Number.parseFloat(infoBag[i].amount)*Number.parseFloat(infoBag[i].price);
+            x = Number.parseFloat(infoBag[i].product.price);
             soma+=x;
         }
         return soma;
     }
 
-    function Product({url, name, details,amount, price, id}){
-
-        let subtotal = Number.parseFloat(amount)*Number.parseFloat(price);
-
+    function Product({url, name, details, price}){
+        let subtotal = Number.parseFloat(price);
+        console.log(infoBag)
         return(
             <>
                 <ProdutoInfo>
@@ -43,18 +40,18 @@ export default function Bag({setShowBag}){
                                 <p>{details}</p>
                             </div>
                             <div>
-                                <p>{amount}x</p>
                                 <p>R$ {subtotal}</p>
+                                <p></p>
                             </div>
                             <div>
-                                <ion-icon onClick={() => Add({id})} name="add-outline"></ion-icon>
+                                <ion-icon name="add-outline"></ion-icon>
                                 <ion-icon name="remove-circle-outline"></ion-icon>
                             </div>
                 </ProdutoInfo>
             </>
         )
     }
-    function Add({id}){
+    {/*function Add({id}){
 
         const findProduct = infoBag.find(item => item._id === id);
         const index = infoBag.indexOf(findProduct)
@@ -67,7 +64,7 @@ export default function Bag({setShowBag}){
         }
         update(infoBag, index, newAmount);
         console.log(infoBag);
-        }
+        }*/}
     
     
     {/*function Deduct({id}){
@@ -84,10 +81,10 @@ export default function Bag({setShowBag}){
             <ContainerBag>
                 <BagHeader>
                     <h1>Minha sacola</h1>
-                    <div><ion-icon name="close-outline"></ion-icon></div>
+                    <div><ion-icon name="close-outline" onClick={()=>setShowBag(false)}></ion-icon></div>
                 </BagHeader>
                 <Produto>
-                    {infoBag.map(product => <Product id={product._id} url={product.url} name={product.name} details={product.details} amount={product.amount} price={product.price}></Product>)}
+                    {infoBag.map(product => <Product url={product.product.url} name={product.product.name} details={product.product.details} price={product.product.price}></Product>)}
                 </Produto>
                 <BagFooter>
                     <Purchase>
