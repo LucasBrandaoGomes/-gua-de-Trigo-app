@@ -32,7 +32,7 @@ export default function Menu(){
     }
 
     useEffect(()=>{
-        const promise = axios.get("http://localhost:5000/products")
+        const promise = axios.get("https://api-aguadetrigo.herokuapp.com/products")
         
         promise.then(res => {
             setProducts(res.data)
