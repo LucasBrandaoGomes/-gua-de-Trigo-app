@@ -6,12 +6,25 @@ import  {  useState, useContext, useEffect }  from  "react"
 import logoIcon from '../images/logoIcon.jpeg'
 import alecrim2 from '../images/alecrim2.jpg';
 import Context from '../contexts/Context.js'
+import Bag from './Bag.js'
 
 export default function Menu(){
     const {infoLogin, infoBag, setInfoBag} = useContext(Context)
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
-    // console.log(infoLogin)
+    const  [ showBag ,  setShowBag ]  =  useState ( false )
+    // const  showOrHide  =  ( )  =>  {
+    //     if  ( showBag ) {
+    //         setShowBag ( false ) ;
+    //     } else {
+    //         setShowBag ( true )
+    //     }
+    
+    // }
+
+    function  showOrHide () {        
+        setShowBag  (  !  showBag  )      
+    }
 
     function SignUp(){
         navigate("/sign-up")
@@ -77,7 +90,7 @@ export default function Menu(){
                     )            
                     }
                 </div>
-                <ion-icon name="cart-outline" onClick = {Bag}/>
+                <ion-icon name="cart-outline" onClick = {showOrHide}/>
                 
             </Header>
             <Catalog>
@@ -94,13 +107,14 @@ export default function Menu(){
                     <button onClick={()=> Add(product)}>Adicionar</button>
                 </Product>
                 ))}
-                </div>
-
-                
-                    
-                
-                
+                </div>      
             </Catalog>
+            {/* { showBag ? < Bag > </Bag> : null } */}
+            {showBag? <Bag/> : null} 
+            {/* < Modal  isOpen  =  { escondido }  overlayClassName =  "modal-overlay"  >
+                < TelaConfirmacao  setEscondido = { setEscondido }  cartao = { cartao }  plano = { plano } / >
+            < / Modal > */}
+
         </Container>
     )
 }
