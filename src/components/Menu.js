@@ -4,7 +4,6 @@ import axios from 'axios'
 import  { useNavigate }  from  'react-router-dom' 
 import  {  useState, useContext, useEffect }  from  "react"
 import logoIcon from '../images/logoIcon.jpeg'
-import alecrim2 from '../images/alecrim2.jpg';
 import Context from '../contexts/Context.js'
 import Bag from './Bag.js'
 
@@ -12,7 +11,9 @@ export default function Menu(){
     const {infoLogin, infoBag, setInfoBag} = useContext(Context)
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
-    const  [ showBag ,  setShowBag ]  =  useState ( false )    
+    const  [ showBag ,  setShowBag ]  =  useState ( false )  
+    const [search, setSearch] = useState ('')
+    const [searchParam] = useState (["name"])
 
     function  showOrHide () {        
         setShowBag  (  !  showBag  )      
@@ -49,9 +50,9 @@ export default function Menu(){
         setInfoBag ([...infoBag, product])    
            
     }
-   
-    console.log(infoBag)
-    
+
+    const lowerSearch = search.toLowerCase();
+    const filterProducts = products.filter((product)=>product.name.toLowerCase().includes(lowerSearch))   
 
     return(
         <Container>
@@ -60,11 +61,14 @@ export default function Menu(){
                     <img src={logoIcon} alt="header-logo"/>
                     <span>ÁGUA DE TRIGO</span>
                 </a>
+
                 <div id = "search">
-                    <ion-icon name="search-outline"></ion-icon>
-                    <input type="text" placeholder="Pesquisar..."/>
-                    
+                
+                    <ion-icon name="search-outline" ></ion-icon>
+                    <input type="text" placeholder="Pesquisar..." value={search} onChange={(e) => setSearch(e.target.value)}/>  
+                                
                 </div>
+
                 <div id = "user">
                     {(infoLogin)? 
                     (
@@ -83,7 +87,7 @@ export default function Menu(){
             <Catalog>
                 <h1>Itens</h1>
                 <div>
-                {products.map((product)=>(
+                {filterProducts.map((product)=>(
                 <Product key = {product._id}>
                     <img src={product.url} alt="produto" />
                     <h1>{product.name}</h1>
@@ -95,8 +99,7 @@ export default function Menu(){
                 </Product>
                 ))}
                 </div>      
-            </Catalog>
-            
+            </Catalog>            
             {showBag? <Bag setShowBag={setShowBag}/> : null} 
             
 
