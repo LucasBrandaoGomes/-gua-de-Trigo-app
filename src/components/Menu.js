@@ -38,6 +38,7 @@ export default function Menu(){
     }
        
     function OneProduct({id, url, name, details, price, product}){
+        console.log(products)
         return (
             <>
                 <Product key={id}>
