@@ -45,6 +45,7 @@ export default function Menu(){
     
     function Add(product){
         setInfoBag ([...infoBag, product])   
+    }
 
 
     const lowerSearch = search.toLowerCase();
@@ -78,7 +79,11 @@ export default function Menu(){
                     )            
                     }
                 </div>
-                <ion-icon name="cart-outline" onClick = {showOrHide}/>
+                <div id="icon">
+                    <ion-icon name="cart-outline" onClick = {showOrHide}/>
+                    <div id="length">{infoBag.length}</div>
+                </div>
+                
                 
             </Header>
             <Catalog>
@@ -212,12 +217,31 @@ const Header = styled.div`
             }
         }
     }
-    ion-icon{
-        color: #FFF5E0;
-        font-size: 35px;
-        &:hover{
-            cursor:pointer;
-        }
+
+    div#icon{
+        
+        ion-icon{
+            color: #FFF5E0;
+            font-size: 35px;
+            
+            &:hover{
+                cursor:pointer;
+            }
+            
+    }
+    div#length{     
+        display: flex;
+        font-family: 'Shippori Antique';
+        align-items: center;
+        justify-content: center;           
+        color: #D37545;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #fff5e0;
+    }
+
+        
     }
     
     `
@@ -241,9 +265,7 @@ const Catalog = styled.div`
     div{
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        
-        
+        align-items: center;       
     }`
 
 const Product = styled.div`
@@ -304,7 +326,4 @@ const Product = styled.div`
             border: 1px solid #D37545;
             border-radius: 5px;
             cursor: pointer;
-    }
-    `
-
-    
+    }`
