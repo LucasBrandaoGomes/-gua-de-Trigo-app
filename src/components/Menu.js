@@ -48,7 +48,7 @@ export default function Menu(){
     }
 
 
-    const lowerSearch = search.toLowerCase();
+    const lowerSearch = search.toLowerCase()
     const filterProducts = products.filter((product)=>product.name.toLowerCase().includes(lowerSearch))   
 
 
