@@ -42,6 +42,7 @@ export default function Bag({showBag, setShowBag}){
                 alert("Pedido finalizado");
                 setDisableButton(false);
                 navigate("/menu");
+                setInfoBag([])
                 setShowBag(false)
 
             })
